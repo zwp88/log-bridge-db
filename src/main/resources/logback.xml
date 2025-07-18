@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="DB" class="com.example.appender.HikariDBAppender">
+        <jdbcUrl>jdbc:mysql://localhost:3306/logging?useSSL=false</jdbcUrl>
+        <username>root</username>
+        <password>123456</password>
+        <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+    </appender>
+
+    <appender name="ASYNC_DB" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>5000</queueSize>
+        <appender-ref ref="DB"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_DB"/>
+    </root>
+</configuration>
+
